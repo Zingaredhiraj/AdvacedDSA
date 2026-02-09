@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+#include<queue>
+
+class Node{
+    public:
+
+        Node* right;
+        Node* left;
+        int data;
+
+        Node(int val){
+            data=val;
+            left=right=NULL;
+        }
+};
+
+class BST{
+    public:
+        Node* Create(Node* root,int val){
+            if(root==NULL){
+                root=new Node(val);
+                return root;
+            }
+
+            if(root->data>val){
+                root->left=Create(root->left,val);
+            }else{
+                root->right=Create(root->right,val);
+            }
+            
+        }
+
+        void inOrder(Node* root){
+            if(root==NULL){
+                return;
+            }
+            inOrder(root->left);
+            cout<<root->data;
+            inOrder(root->right);
+        }
+};
+int main(){
+    BST b;
+    int arr[]={25,20,10,22,30,28,40,29};
+
+    Node* root=NULL;
+    for(int i=0;i<8;i++){
+        b.Create(root,arr[i]);
+    }
+    b.inOrder(root);
+
+    return 0;
+}
